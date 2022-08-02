@@ -1,5 +1,9 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +14,9 @@ public class Util {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "101192";
 
+    private static final SessionFactory sessionFactory = new Configuration()
+            .addAnnotatedClass(User.class)
+            .buildSessionFactory();
 
     public static Connection getConnection () {
         Connection connection = null;
@@ -24,4 +31,7 @@ public class Util {
         return connection;
     }
 
+    public static SessionFactory getConnectionHibernate() {
+        return sessionFactory;
+    }
 }
